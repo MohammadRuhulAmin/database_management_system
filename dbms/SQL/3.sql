@@ -14,6 +14,34 @@ Topic :
         );
 
 
+    **To make relation between two query we use EXISTS or NOT EXISTS in correlated Sub Query. EXISTS and NOT EXISTS Operators are used 
+    to add to relation between Outter query and inner query. 
+
+
+    SELECT e.*
+    FROM Employee e
+    WHERE e.tenure > (
+        SELECT AVG(tenure)
+        FROM Employee
+        WHERE department_id = e.department_id
+    )
+    
+    is similar to the below query :
+
+    SELECT e.*
+    FROM Employee e
+    WHERE EXISTS (
+        SELECT 1
+        FROM Employee e2
+        WHERE e2.department_id = e.department_id
+        GROUP BY e2.department_id
+        HAVING e.tenure > AVG(e2.tenure)
+    )
+
+
+
+
+    
 
 
 
@@ -22,4 +50,7 @@ Topic :
 
 
 
-Tutorial Link : https://www.youtube.com/watch?v=0d419Vo2Po4&list=PLxCzCOWd7aiHqU4HKL7-SITyuSIcD93id&index=11
+
+
+Tutorial Link : https://www.youtube.com/watch?v=0d419Vo2Po4&list=PLxCzCOWd7aiHqU4HKL7-SITyuSIcD93id&index=11,
+https://www.youtube.com/watch?v=wA9GJZcB618&list=PLxCzCOWd7aiHqU4HKL7-SITyuSIcD93id&index=13
